@@ -3,6 +3,7 @@
 !/.gitignore
 !/.gitattributes
 !/README.md
+!/INSTALL.bat
 !/LICENSE
 !/rb2/
 /rb2/*

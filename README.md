@@ -21,70 +21,63 @@ upload or share built NROs or game files.
 
 Other Switch models (OLED, Lite, v2) have not been tested. Lite has no docked mode.
 
-## What you need
+## How to install
 
-- A Switch running [Atmosphère](https://github.com/Atmosphere-NX/Atmosphere) custom firmware with the Homebrew Menu.
-  This guide doesn't cover installing it; see the [NH Switch Guide](https://nh-server.github.io/switch-guide/).
-- A microSD card with about 6 GB free for the game.
-- Your own **Xbox 360 Europe disc** of the game, extracted to a folder. Other regions won't work, because the port
-  patches addresses in that one executable. The build checks this and stops if `default.xex` doesn't match:
-  ```
-  SHA-256: a43d7fa4404041deb82ecabb32a22d639b96dac351d4269114a7bc395e1b8973
-  ```
-- A PC to build on: Windows 10/11 with WSL 2 (Ubuntu), or Linux. The build downloads and compiles a full toolchain and uses about 5 GB of disk. It took about 10 minutes on a PC with 16 GB of RAM that already had the Docker images; the first run on a new PC takes longer because it downloads them.
+This takes one double-click on a Windows PC, plus a few things to get ready first.
 
-## Step 1: set up the build tools
+### What you need
 
-On Windows, install WSL and open Ubuntu as root (in PowerShell):
+- **A Switch that can run homebrew** (Atmosphère custom firmware). If yours can't yet, follow the
+  [NH Switch Guide](https://nh-server.github.io/switch-guide/) first. Not every Switch can be modded.
+- **Your own Xbox 360 Europe copy of the game**, extracted to a folder so you can see `default.xex` and `data` inside.
+  If you only have a disc image (`.iso`), extract it first with an Xbox 360 ISO extraction tool. Other regions won't
+  work; the installer checks this for you.
+- **A Windows 10 or 11 PC** with 16 GB of RAM recommended, a CPU that supports AVX2 (most from about 2015 or newer),
+  25 GB of free disk space and an internet connection.
+- **A microSD card** with about 6 GB free, in a card reader or your PC's card slot.
+
+### Install it
+
+1. Download `rb2-switch-installer-v0.2.0.zip` from the
+   [latest release](https://github.com/brickyup/raging-blast-2-switch/releases/latest).
+2. Right-click the ZIP, choose **Extract All**, and open the extracted folder.
+3. Double-click **`INSTALL.bat`**. If Windows shows a "protected your PC" message, it's because this file is new and
+   unsigned. Click **More info**, then **Run anyway** if you're happy to run it. You can read the script first in
+   `rb2/switch-p2/tools/install_windows.ps1`.
+4. Pick your game folder when asked.
+5. If you don't have Ubuntu on WSL yet (Windows' built-in Linux), type **y**. When that finishes, restart if asked, open
+   Ubuntu from the Start menu, choose any username and password, then double-click `INSTALL.bat` again.
+6. Wait for the build. It can take 30 minutes or more the first time. Leave the window open.
+7. Pick your SD card when asked. The installer copies everything to the right place.
+
+### Play it
+
+1. Put the SD card back in your Switch and turn it on in Atmosphère.
+2. **Hold R** while opening any installed game. The Homebrew Menu appears.
+3. Pick the app and start it.
+
+Don't start it from the Album: that gives it too little memory and it will crash.
+
+The first time you see a new scene it may hitch briefly while graphics are prepared. It gets smoother after that.
+
+### Updating
+
+Download the newest ZIP from the releases page and run `INSTALL.bat` again. Your settings on the SD card are kept.
+
+### Build it by hand (Linux or advanced users)
+
+Install git, Docker and the other packages listed in `rb2/switch-p2/tools/easy_build.sh`, start Docker, then:
 
 ```bash
-wsl --install -d Ubuntu
+git clone https://github.com/brickyup/raging-blast-2-switch rb2-switch
 ```
 
 ```bash
-wsl -u root
+cd rb2-switch && GAME="/path/to/your/game" bash rb2/switch-p2/build_switch_p2.sh
 ```
 
-Then, inside Ubuntu, install the packages and start Docker:
-
-```bash
-apt-get update
-```
-
-```bash
-apt-get install -y git rsync file docker.io cmake ninja-build clang lld python3-pip pkg-config glslang-tools libx11-xcb-dev libwayland-dev libxkbcommon-dev libgtk-3-dev libxrandr-dev libxi-dev libxcursor-dev libxinerama-dev libxss-dev libasound2-dev libpulse-dev libudev-dev libdbus-1-dev libunwind-dev liblz4-dev
-```
-
-```bash
-service docker start
-```
-
-## Step 2: build
-
-Clone this repository inside Ubuntu, not on the Windows drive:
-
-```bash
-cd ~ && git clone https://github.com/brickyup/raging-blast-2-switch rb2-switch
-```
-
-Run the build. Set `GAME` to your extracted game folder. In WSL, `C:\` is `/mnt/c/`:
-
-```bash
-cd ~/rb2-switch && GAME="/mnt/c/Games/Raging Blast 2" bash rb2/switch-p2/build_switch_p2.sh
-```
-
-The script downloads the toolchain, translates your `default.xex` and builds everything. If it stops on a network
-error, run it again; finished steps are skipped. When it's done you'll have:
-
-```
-rb2/switch-p2/out/rb2.nro
-rb2/switch-p2/out/rb2.toml
-```
-
-**Optional icon:** put a 256x256 `icon.jpg` in `rb2/switch-p2/` before building. Without one, the app gets the default
-homebrew icon.
-
-## Step 3: copy to the SD card
+The results are `rb2.nro` and `rb2.toml` in `rb2/switch-p2/out/`. Put a 256x256 `icon.jpg` in `rb2/switch-p2/` first if
+you want a custom icon. On the SD card, the files go here:
 
 ```
 sdmc:/switch/rb2-nx/
@@ -95,15 +88,6 @@ sdmc:/switch/rb2-nx/
         data/
         ...everything else from your extracted game folder
 ```
-
-## Step 4: run it
-
-Start it with **full application memory**. Hold **R** while launching any installed game, then pick the app in the
-Homebrew Menu.
-
-Don't launch it from the Album. That mode gives the app only about 400 MB and it will crash.
-
-The first launch of a new scene can hitch while shaders are built. They are saved and prepared at startup next time.
 
 ## Settings
 
@@ -149,11 +133,13 @@ of sync yet.
 
 | Problem | Try this |
 |---|---|
-| Build says `default.xex` isn't supported | You need the Europe disc's executable, with the hash above. |
-| Build can't reach Docker | Run `service docker start` and make sure you're root (`wsl -u root`). |
-| Crash right after launch | Launch with full application memory (Step 4), not from the Album. |
-| Crash or black screen when the game loads | Check that `game/default.xex` and `game/data/` are in the right place (Step 3). |
-| Low frame rate | Check `rb2_cpu_mhz` and `rb2_gpu_460`, then lower the resolution. If sys-clk is installed, make sure it isn't overriding the clocks. |
+| "default.xex isn't in that folder" | Pick the folder that directly contains `default.xex`. If you only have an `.iso`, extract it first. |
+| "This default.xex isn't supported" | Only the Xbox 360 Europe disc works. |
+| WSL won't install | Virtualization may be turned off in your PC's BIOS. Search your PC model plus "enable virtualization". |
+| The build fails | Run `INSTALL.bat` again, since network errors are common. If it still fails, open an issue and attach `build.log`. |
+| Crash right after launch | Hold R while opening a game (see Play it). Don't use the Album. |
+| Crash or black screen when the game loads | Check that `switch/rb2-nx/game/default.xex` and `game/data` are on the SD card. |
+| Low frame rate | Check `rb2_cpu_mhz` and `rb2_gpu_460` in Settings, then lower the resolution. If sys-clk is installed, make sure it isn't overriding the clocks. |
 
 **Reporting a problem:** open an issue with your console model and firmware, and attach the files from
 `sdmc:/switch/rb2-nx/logs` plus `rex_crash.log` and `rex_stderr.log` if you have them. Don't post your keys or game
