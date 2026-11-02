@@ -1,0 +1,53 @@
+#include <rex/runtime/guest/function.h>
+#include "generated/rb2_init.h"
+#include <chrono>
+
+using namespace std::chrono_literals;
+
+int vsprintf_s_entry(char* buffer, size_t size, const char* format, va_list args) {
+    return vsprintf_s(buffer, size, format, args);
+}
+
+int sprintf_s_entry(char* buffer, size_t size, const char* format, va_list args) {
+    return sprintf_s(buffer, size, format, args);
+}
+
+int printf_entry(const char* format, va_list args) {
+    return printf(format, args);
+}
+
+// SpGameServer::_vsyncWait
+PPC_FUNC_IMPL(__imp__sub_8249A410);
+PPC_FUNC(sub_8249A410)
+{
+    auto now = std::chrono::steady_clock::now();
+    constexpr auto INTERVAL = 1000000000ns / 60;
+    auto next = now + (INTERVAL - now.time_since_epoch() % INTERVAL);
+
+    std::this_thread::sleep_until(next);
+}
+
+// Memory functions
+GUEST_FUNCTION_HOOK(sub_8244D568, memset)
+GUEST_FUNCTION_HOOK(sub_8244D038, memcpy)
+GUEST_FUNCTION_HOOK(sub_8244DC48, memmove)
+
+// String functions
+GUEST_FUNCTION_HOOK(sub_8244BC38, strncmp)
+GUEST_FUNCTION_HOOK(sub_8244C390, strncpy)
+GUEST_FUNCTION_HOOK(sub_8244FAE0, (int(*)(char*, size_t, const char*, va_list))vsprintf_s_entry)
+GUEST_FUNCTION_HOOK(sub_8244E920, (errno_t(*)(char*, rsize_t, const char*))strcpy_s)
+GUEST_FUNCTION_HOOK(sub_8244E9D8, wcslen)
+GUEST_FUNCTION_HOOK(sub_8244fc68, bsearch)
+GUEST_FUNCTION_HOOK(sub_8244fd70, tolower)
+GUEST_FUNCTION_HOOK(sub_824500c0, strtol)
+GUEST_FUNCTION_HOOK(sub_824500c8, strtoul)
+GUEST_FUNCTION_HOOK(sub_824500d0, (errno_t(*)(char*, size_t, const char*, size_t))strncpy_s)
+GUEST_FUNCTION_HOOK(sub_82450218, (errno_t(*)(char*, size_t, const char*, size_t))strncat_s)
+GUEST_FUNCTION_HOOK(sub_82450380, (errno_t(*)(char*, size_t, const char*))strcat_s)
+GUEST_FUNCTION_HOOK(sub_8244cca0, (int(*)(const char*, va_list))printf_entry)
+GUEST_FUNCTION_HOOK(sub_8244cdc0, (int(*)(char*, size_t, const char*, va_list))sprintf_s_entry)
+
+// Math functions
+GUEST_FUNCTION_HOOK(sub_8244d5f0, atof)
+GUEST_FUNCTION_HOOK(sub_8244d520, atoi)

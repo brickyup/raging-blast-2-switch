@@ -1,0 +1,221 @@
+# Dragon Ball: Raging Blast 2 (Xbox 360, Europe, title 4E4D0826 v0.0.0.3) - ReXGlue 0.10 codegen manifest.
+# Derived from moddedrounds/RB2-Android config/rb2_manifest.toml (USA Rev 1): every address remapped with
+# tools/map_usa_to_eu.py (function-length alignment + per-address verification). Functions not listed here
+# come from rexglue's own analysis of the Europe executable.
+
+[project]
+name = "rb2"
+sdk_version = "0.10.0"
+
+[entrypoint]
+file_path = "../game/default.xex"
+out_directory_path = "generated/default"
+includes = ["perf_locals.toml"]
+
+[entrypoint.rexcrt]
+
+# Functions the automatic analysis misses (otherwise codegen reports unresolved branches).
+[entrypoint.functions]
+# Virtual-call thunks (lwz r12/r11,0(r3); ...) whose address the code builds with lis+addi: reached only through
+# function pointers, so the analysis misses them (same kind as the 0x822AC0D8 crash).
+0x82108760 = {}  # thunk, address built at 0x82341004
+0x82108770 = {}  # thunk, address built at 0x82105920
+0x822C8588 = {}  # thunk, address built at 0x82105750
+0x822C8598 = {}  # thunk, address built at 0x82105740
+0x8233CBE8 = {}  # thunk, address built at 0x82172B94
+0x8233CBF8 = {}  # thunk, address built at 0x822C8BCC
+0x8233CC08 = {}  # thunk, address built at 0x821057FC
+0x8233CC18 = {}  # thunk, address built at 0x821057DC
+0x8233CC28 = {}  # thunk, address built at 0x822C4FB8
+0x8233CC38 = {}  # thunk, address built at 0x821057F8
+0x8233CC48 = {}  # thunk, address built at 0x82172BA4
+0x82340270 = {}  # thunk, address built at 0x82105958
+0x82340280 = {}  # thunk, address built at 0x821056E4
+0x82340290 = {}  # thunk, address built at 0x821056F4
+0x823402A0 = {}  # thunk, address built at 0x8233FAB4
+0x823402B0 = {}  # thunk, address built at 0x8233FAD4
+0x823402C0 = {}  # thunk, address built at 0x82287954
+0x823402D0 = {}  # thunk, address built at 0x82105960
+0x823402E0 = {}  # thunk, address built at 0x821056EC
+0x823402F0 = {}  # thunk, address built at 0x8210572C
+0x82340300 = {}  # thunk, address built at 0x8233FABC
+0x82340310 = {}  # thunk, address built at 0x821057A8
+0x82340320 = {}  # thunk, address built at 0x821056D8
+0x82340330 = {}  # thunk, address built at 0x8228797C
+0x82340340 = {}  # thunk, address built at 0x8233FAA8
+0x82340350 = {}  # thunk, address built at 0x8233FAC4
+0x82340360 = {}  # thunk, address built at 0x821056D0
+0x82340370 = {}  # thunk, address built at 0x821056E0
+0x82340380 = {}  # thunk, address built at 0x821058FC
+0x82340390 = {}  # thunk, address built at 0x8233FAAC
+0x823419D8 = {}  # thunk, address built at 0x82105798
+0x823419E8 = {}  # thunk, address built at 0x823414B0
+0x82341A08 = {}  # thunk, address built at 0x82341160
+0x82341A28 = {}  # thunk, address built at 0x822C4FC0
+0x82341A38 = {}  # thunk, address built at 0x823414C0
+0x82341A58 = {}  # thunk, address built at 0x82341168
+0x82341A78 = {}  # thunk, address built at 0x82105800
+0x82341A88 = {}  # thunk, address built at 0x82341500
+0x82341AA8 = {}  # thunk, address built at 0x82341178
+0x82341AC8 = {}  # thunk, address built at 0x82105950
+0x82341AD8 = {}  # thunk, address built at 0x82341550
+0x82341B08 = {}  # thunk, address built at 0x82341188
+0x82341B18 = {}  # thunk, address built at 0x82105970
+0x82341B28 = {}  # thunk, address built at 0x82341558
+0x82341B58 = {}  # thunk, address built at 0x82341198
+0x82341B68 = {}  # thunk, address built at 0x82105978
+0x82341BB8 = {}  # thunk, address built at 0x82340F2C
+0x82341BF8 = {}  # thunk, address built at 0x82340F3C
+0x82341C08 = {}  # thunk, address built at 0x823415C4
+0x82341C38 = {}  # thunk, address built at 0x821057A0
+0x82341C48 = {}  # thunk, address built at 0x823415CC
+0x82341C78 = {}  # thunk, address built at 0x82340F80
+0x82341C88 = {}  # thunk, address built at 0x823415DC
+0x82341CB8 = {}  # thunk, address built at 0x82340F8C
+0x82341CC8 = {}  # thunk, address built at 0x823415E4
+0x82341CF8 = {}  # thunk, address built at 0x823410C0
+0x82341D08 = {}  # thunk, address built at 0x82105734
+0x82341D48 = {}  # thunk, address built at 0x823410F4
+0x82341D58 = {}  # thunk, address built at 0x82105748
+0x82341D98 = {}  # thunk, address built at 0x823410FC
+0x82341DA8 = {}  # thunk, address built at 0x82105980
+0x82341DE8 = {}  # thunk, address built at 0x8234110C
+0x82341DF8 = {}  # thunk, address built at 0x82341008
+0x82341E28 = {}  # thunk, address built at 0x8234111C
+0x82341E38 = {}  # thunk, address built at 0x8210578C
+0x82341E48 = {}  # thunk, address built at 0x823414A8
+0x82341E88 = {}  # thunk, address built at 0x823414B4
+0x82341E98 = {}  # thunk, address built at 0x82341344
+0x82341EA8 = {}  # thunk, address built at 0x82341164
+0x82341EC8 = {}  # thunk, address built at 0x823414F8
+0x82341EE8 = {}  # thunk, address built at 0x82341170
+0x82341F08 = {}  # thunk, address built at 0x82341508
+0x82341F38 = {}  # thunk, address built at 0x82341180
+0x82341F48 = {}  # thunk, address built at 0x823414E0
+0x82341F78 = {}  # thunk, address built at 0x82341190
+0x82341F88 = {}  # thunk, address built at 0x82341560
+0x82341FC8 = {}  # thunk, address built at 0x82105988
+0x82342008 = {}  # thunk, address built at 0x82105900
+0x82342048 = {}  # thunk, address built at 0x82105790
+0x82342058 = {}  # thunk, address built at 0x823415C8
+0x82342088 = {}  # thunk, address built at 0x82340F7C
+0x82342098 = {}  # thunk, address built at 0x823415D4
+0x823420C8 = {}  # thunk, address built at 0x82340F84
+0x82342108 = {}  # thunk, address built at 0x82340F94
+0x82342118 = {}  # thunk, address built at 0x823415EC
+0x82342148 = {}  # thunk, address built at 0x823410C4
+0x82342188 = {}  # thunk, address built at 0x823410F8
+0x823421C8 = {}  # thunk, address built at 0x82341104
+0x823421F8 = {}  # thunk, address built at 0x82341114
+0x824C9310 = {}  # thunk, address built at 0x824CB8E0
+# Code pointers in data right after a return/branch/padding, not found by the analysis (pointer scan of the
+# Europe image; the first one crashed the Switch build at 0x822AC0D8, called from 0x823A7DB0).
+0x821A2030 = {}  # ptr at 0x820D0D3C
+0x822AC0D8 = {}  # ptr at 0x820D63C4
+0x822C85A8 = {}  # ptr at 0x820D727C
+0x823386B0 = {}  # ptr at 0x820D9884
+0x823403A0 = {}  # ptr at 0x820D99F0
+0x8237AAB8 = {}  # ptr at 0x8261380C
+0x823F1118 = {}  # ptr at 0x820DF590
+0x823F2DC0 = { share_registers = true }  # ptr at 0x820DF5A8
+0x823F4838 = {}  # ptr at 0x820DF5C8
+0x823F600C = {}  # ptr at 0x820DF610
+0x823F6174 = {}  # ptr at 0x820DF618
+0x823F6184 = {}  # ptr at 0x820DF620
+0x823F7608 = { share_registers = true }  # ptr at 0x820DF640
+0x823F7618 = {}  # ptr at 0x820DF648
+0x823F95D8 = {}  # ptr at 0x820013C0
+0x823FB9A0 = {}  # ptr at 0x82001488
+0x823FB9A8 = {}  # ptr at 0x82001484
+0x823FB9B0 = {}  # ptr at 0x820014BC
+0x823FB9C0 = {}  # ptr at 0x82001470
+0x82402520 = {}  # ptr at 0x82001494
+0x82402528 = {}  # ptr at 0x8200147C
+0x82402530 = {}  # ptr at 0x820018F4
+0x82402540 = {}  # ptr at 0x820014A4
+0x82402548 = {}  # ptr at 0x820018D8
+0x82402550 = {}  # ptr at 0x8200148C
+0x82402558 = {}  # ptr at 0x820018A8
+0x824027F8 = {}  # ptr at 0x82001964
+0x82402808 = {}  # ptr at 0x82001498
+0x82402810 = {}  # ptr at 0x820014B8
+0x82402818 = {}  # ptr at 0x82001490
+0x82402820 = {}  # ptr at 0x820014B0
+0x82402828 = {}  # ptr at 0x820014B4
+0x82403B10 = {}  # ptr at 0x82001A1C
+0x82404858 = {}  # ptr at 0x82001AE0
+0x82407680 = {}  # ptr at 0x82001CD8
+0x824103E0 = {}  # ptr at 0x820DF658
+0x82412C78 = { share_registers = true }  # ptr at 0x820DF670
+0x82412C90 = {}  # ptr at 0x820DF678
+0x82415768 = {}  # ptr at 0x82005BBC
+0x824787E4 = { share_registers = true }  # ptr at 0x820DF688
+0x824787F4 = {}  # ptr at 0x820DF690
+0x8247888C = {}  # ptr at 0x820DF6A8
+0x82478918 = { share_registers = true }  # ptr at 0x820DF6B8
+0x82478928 = {}  # ptr at 0x820DF6C0
+0x824789B0 = { share_registers = true }  # ptr at 0x820DF6D0
+0x824789C0 = {}  # ptr at 0x820DF6D8
+0x8247C940 = { share_registers = true }  # ptr at 0x820DF700
+0x8247E654 = { share_registers = true }  # ptr at 0x820DF730
+0x82481EF4 = { share_registers = true }  # ptr at 0x820DF770
+0x82483E6C = {}  # ptr at 0x820DF7A8
+0x8248402C = { share_registers = true }  # ptr at 0x820DF7B8
+0x82485090 = { share_registers = true }  # ptr at 0x820DF7E8
+0x824BDBD4 = { share_registers = true }  # ptr at 0x820DF860
+0x824BDBE4 = {}  # ptr at 0x820DF868
+0x824BDF50 = {}  # ptr at 0x820DF880
+0x824BDFF4 = {}  # ptr at 0x820DF898
+0x824BE24C = { share_registers = true }  # ptr at 0x820DF8A8
+0x824BE25C = {}  # ptr at 0x820DF8B0
+0x824BE4FC = {}  # ptr at 0x820DF8C8
+0x824BEA54 = {}  # ptr at 0x820DF8E0
+0x824BEFB4 = {}  # ptr at 0x820DF8F8
+0x824BF07C = { share_registers = true }  # ptr at 0x820DF908
+0x824BF08C = {}  # ptr at 0x820DF910
+0x824BF16C = {}  # ptr at 0x820DF928
+0x824BF40C = {}  # ptr at 0x820DF940
+0x824BF778 = {}  # ptr at 0x820DF958
+0x824BFF80 = {}  # ptr at 0x820311BC
+0x824C77B0 = {}  # ptr at 0x820317F8
+0x824C77D0 = {}  # ptr at 0x8203185C
+0x824C77F0 = {}  # ptr at 0x82031854
+0x824C7970 = {}  # ptr at 0x820318A8
+0x824C7990 = {}  # ptr at 0x820318AC
+0x824C79B0 = {}  # ptr at 0x820318B0
+0x824C79D0 = {}  # ptr at 0x820318B4
+0x824C79F0 = {}  # ptr at 0x820318B8
+0x824C7A10 = {}  # ptr at 0x820318BC
+0x824C7A30 = {}  # ptr at 0x820318C0
+0x824C7A50 = {}  # ptr at 0x820318C4
+0x824C7A70 = {}  # ptr at 0x820318C8
+0x824C7A90 = {}  # ptr at 0x820318CC
+0x824CEAD8 = {}  # ptr at 0x820317E4
+0x824D8EA0 = {}  # ptr at 0x820DF968
+0x822288E8 = { size = 0x2B0 }  # 5-way switch tail jumped to from sub_82228270 (USA 0x822289C8, size 0x2B0)
+0x82337AD8 = { size = 0x8 }  # tail-branch target from 0x82438018 (sized to the next function)
+0x8247A610 = { size = 0xC }  # tail-branch target from 0x8247233C (USA 0x8247B878)
+0x82479AE0 = { size = 0x18 }  # tail-branch target from 0x824729A8 (USA 0x8247AD48)
+# Called only through pointers; found by mapping the USA function list (tools/map_usa_to_eu.py neighbours).
+0x82147C50 = { size = 0xA8 }  # USA 0x82147DD8
+0x8219BF38 = { size = 0x6C }  # USA 0x8219C118
+0x822AC210 = { size = 0x10 }  # USA 0x822AC310
+0x822AC220 = { size = 0x10 }  # USA 0x822AC320
+0x822AC230 = { size = 0x10 }  # USA 0x822AC330
+0x822AC240 = { size = 0x10 }  # USA 0x822AC340
+0x82383110 = { size = 0x10 }  # USA 0x82382FA8
+0x823CA6C0 = { size = 0x10 }  # USA 0x823CA768
+0x823CA6D0 = { size = 0x80 }  # USA 0x823CA778
+0x823DA3F0 = { size = 0x44 }  # USA 0x823DA560
+0x823DE628 = { size = 0x28 }  # USA 0x823DE798
+0x823E2B78 = { size = 0x14 }  # USA 0x823E2D58
+0x823E2C90 = { size = 0x8 }  # USA 0x823E2E70
+0x82402E00 = { size = 0x18 }  # USA 0x82402DE8
+0x8247A57C = { size = 0x10 }  # USA 0x8247B7E4
+0x8247A61C = { size = 0x10 }  # USA 0x8247B884
+0x825EEC58 = { size = 0x6C }  # USA 0x825EEC78
+
+[[entrypoint.midasm_hook]]
+address = 0x823D9F14  # USA 0x823DA084: stw r9,24(r31) in the renderer setup (sub_823D9E20)
+name = "RB2RenderSizeHook"
+registers = ["r9", "r8"]

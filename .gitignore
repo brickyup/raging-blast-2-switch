@@ -1,0 +1,25 @@
+# Allowlist: only our own source goes in. Never add game files, recompiled code, NROs or keys.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/LICENSE
+!/rb2/
+/rb2/*
+!/rb2/LICENSE.RB2
+!/rb2/server/
+!/rb2/src/
+!/rb2/switch-p2/
+/rb2/switch-p2/icon.jpg
+out/
+generated/
+game/
+pgo-data/
+__pycache__/
+*.xex
+*.nro
+*.elf
+*.gcda
+*.keys
+*.log
+*.zip

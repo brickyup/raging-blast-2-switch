@@ -1,0 +1,12 @@
+# Code generation for speed, as Prototype 2 NX project/perf_locals.toml (Mass Effect NX measured +9 % fps).
+# Guest registers as C++ locals instead of PPCContext fields in memory. Root keys: keep them outside any table.
+# skip_msr / reserved_as_local are not used: the guest interrupt-region locks stay (proto_msr_lock_mode).
+# After every codegen without share_registers marks, check with
+#   python3 tools/read_before_write.py generated/default
+cr_as_local = true
+# non_volatile_as_local stays off: with it the intro video came out as macroblock garbage. The game's hand-written
+# VMX video decoder passes non-volatile registers between functions outside the ABI (as Prototype 2's skinning
+# helper did with v14), and locals that start at zero break that.
+non_volatile_as_local = false
+xer_as_local = true
+ctr_as_local = true
