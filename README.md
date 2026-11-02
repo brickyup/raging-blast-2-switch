@@ -1,4 +1,14 @@
+<p align="center">
+  <img src="docs/assets/banner.svg" alt="Raging Blast 2 — Nintendo Switch homebrew" width="100%">
+</p>
+
 # Dragon Ball: Raging Blast 2 on Nintendo Switch
+
+**An unofficial native port, built with static recompilation.**
+
+[**Get the installer →**](https://github.com/brickyup/raging-blast-2-switch/releases/latest) · [Installation](#how-to-install) · [Report a bug](https://github.com/brickyup/raging-blast-2-switch/issues/new?template=bug_report.md) · [Contribute](CONTRIBUTING.md)
+
+> **Bring your own game.** The release is an installer, not a ready-to-play game. You need your own Xbox 360 Europe copy to build the app.
 
 An unofficial native Switch port of the Xbox 360 game, made with static recompilation. It is not emulation: the game's
 code is translated to C++ and built into a Switch homebrew app, and a native Vulkan renderer draws the game.
@@ -11,7 +21,9 @@ upload or share built NROs or game files.
 
 ## Status
 
-| | |
+The figures below are maintainer-reported results from the existing project documentation, not independent benchmarks. Performance varies by scene and configuration.
+
+| Area | Reported status |
 |---|---|
 | Boots, menus, fights | Working (tested on one original Switch, model v1) |
 | Menus | 60 fps |
@@ -22,6 +34,8 @@ upload or share built NROs or game files.
 Other Switch models (OLED, Lite, v2) have not been tested. Lite has no docked mode.
 
 ## How to install
+
+New here? Follow the steps below. See [Contributing](CONTRIBUTING.md) for testing and bug-report guidance.
 
 This takes one double-click on a Windows PC, plus a few things to get ready first.
 
@@ -165,3 +179,4 @@ license ([rb2/LICENSE.RB2](rb2/LICENSE.RB2)); `rb2/switch-p2/tools/mgr` keeps it
 
 This is an unofficial fan project, not affiliated with or endorsed by Nintendo, Microsoft or the owners of Dragon Ball
 and Raging Blast 2. All trademarks belong to their owners. You need your own legally obtained copy of the game.
+
