@@ -31,7 +31,7 @@ Other Switch models (OLED, Lite, v2) have not been tested. Lite has no docked mo
   ```
   SHA-256: a43d7fa4404041deb82ecabb32a22d639b96dac351d4269114a7bc395e1b8973
   ```
-- A PC to build on: Windows 10/11 with WSL 2 (Ubuntu), or Linux. The build downloads and compiles a full toolchain, so expect it to take a long time and use a lot of disk space.
+- A PC to build on: Windows 10/11 with WSL 2 (Ubuntu), or Linux. The build downloads and compiles a full toolchain and uses about 5 GB of disk. It took about 10 minutes on a PC with 16 GB of RAM that already had the Docker images; the first run on a new PC takes longer because it downloads them.
 
 ## Step 1: set up the build tools
 
@@ -61,11 +61,10 @@ service docker start
 
 ## Step 2: build
 
-Clone this repository inside Ubuntu, not on the Windows drive. Replace `<this repository's URL>` with the address
-shown under the green **Code** button on this page:
+Clone this repository inside Ubuntu, not on the Windows drive:
 
 ```bash
-cd ~ && git clone <this repository's URL> rb2-switch
+cd ~ && git clone https://github.com/brickyup/raging-blast-2-switch rb2-switch
 ```
 
 Run the build. Set `GAME` to your extracted game folder. In WSL, `C:\` is `/mnt/c/`:
